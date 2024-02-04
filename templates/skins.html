@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<title> Skin listing </title>
+
+<h1> Available skins </h1>
+
+{% for skin in skins %}
+Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }}
+Name: {{ skin.skin_name }}
+Game: {{ skin.game }}
+Owner: {{ skin.username }}
+Price: {{ skin.skin_price }}
+{% endfor %}

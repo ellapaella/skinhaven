@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<title> Profile page </title>
+
+<h1> {{ profile.profilename }}: {{ profile.game }} </h1>
+
+<h2> Your profile skins </h2>
+
+{% for skin in skins %}
+Name: {{ skins.skin_name }}
+Price: {{ skins.skin_price }}
+{% endfor %}

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+
+<p>
+<form action="/account/profiles/new/validate" method="POST">
+Profile name: <input type="text" name="profile_name" size="30"> <br>
+Game: <input type="text" name="game" size="30"> <br>
+<input type="submit" value="Make">
+<input type="hidden" name="creator" value="{{ session.username }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>

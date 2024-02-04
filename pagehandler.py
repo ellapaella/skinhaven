@@ -3,9 +3,9 @@ import secrets
 from flask import redirect, render_template, request, session, abort
 from app import app
 
-# import skinhandler
 import users
-# import threader
+import skinhandler
+import threader
 
 #--------- Main Page ---------#
 
@@ -96,58 +96,58 @@ def account_profiles_id(username, profile_number):
     else:
         return render_template("no_credentials.html")
 
-# #--------- Thread handling ---------#
+#--------- Thread handling ---------#
 
-# @app.route("/threads")
-# def threads():
-#     rows = threader.get_threads()
-#     return render_template("threads.html", threads=rows)
+@app.route("/threads")
+def threads():
+    rows = threader.get_threads()
+    return render_template("threads.html", threads=rows)
 
-# @app.route("/threads/new")
-# def threads_new():
-#     return render_template("threads_new.html")
+@app.route("/threads/new")
+def threads_new():
+    return render_template("threads_new.html")
 
-# @app.route("/threads/new/validate", methods=['POST'])
-# def threads_new_validate():
-#     creator = request.form["creator"]
-#     csrf_token = request.form["csrf_token"]
-#     topic = request.form["topic"]
-#     msg_contents = request.form["msg_contents"]
+@app.route("/threads/new/validate", methods=['POST'])
+def threads_new_validate():
+    creator = request.form["creator"]
+    csrf_token = request.form["csrf_token"]
+    topic = request.form["topic"]
+    msg_contents = request.form["msg_contents"]
 
-#     if csrf_token != session["csrf_token"]:
-#         abort(403)
+    if csrf_token != session["csrf_token"]:
+        abort(403)
 
-#     try:
-#         threader.add_thread(creator, topic, msg_contents)
-#     except ValueError as e:
-#         print(e)
-#     return redirect("/threads")
+    try:
+        threader.add_thread(creator, topic, msg_contents)
+    except ValueError as e:
+        print(e)
+    return redirect("/threads")
 
-# @app.route("/threads/<int:id>")
-# def threads_id(id):
-#     thread_id = id
-#     messages = threader.get_thread_messages(thread_id)
-#     return render_template("threads_id.html", thread_id=thread_id, messages=messages)
+@app.route("/threads/<int:id>")
+def threads_id(id):
+    thread_id = id
+    messages = threader.get_thread_messages(thread_id)
+    return render_template("threads_id.html", thread_id=thread_id, messages=messages)
 
-# @app.route("/threads/message/new/validate", methods=['POST'])
-# def message_new_validate():
-#     creator = request.form["creator"]
-#     csrf_token = request.form["csrf_token"]
-#     thread_id = request.form["thread_id"]
-#     msg_contents = request.form["message"]
+@app.route("/threads/message/new/validate", methods=['POST'])
+def message_new_validate():
+    creator = request.form["creator"]
+    csrf_token = request.form["csrf_token"]
+    thread_id = request.form["thread_id"]
+    msg_contents = request.form["message"]
 
-#     if csrf_token != session["csrf_token"]:
-#         abort(403)
+    if csrf_token != session["csrf_token"]:
+        abort(403)
 
-#     try:
-#         threader.add_message(creator, thread_id, msg_contents)
-#         return redirect("/threads/"+thread_id)
-#     except Exception as e:
-#         return render_template("error.html", error=e)
+    try:
+        threader.add_message(creator, thread_id, msg_contents)
+        return redirect("/threads/"+thread_id)
+    except Exception as e:
+        return render_template("error.html", error=e)
 
-# #--------- Skin handling ---------#
+#--------- Skin handling ---------#
 
-# @app.route("/skins")
-# def skinner():
-#     skins = skinhandler.get_skins()
-#     return render_template("skins.html", skins=skins)
+@app.route("/skins")
+def skinner():
+    skins = skinhandler.get_skins()
+    return render_template("skins.html", skins=skins)
