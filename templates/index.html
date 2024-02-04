@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<title>Skinhaven - THE place for trading gaming skins worldwide</title>
+
+<h1><b>Welcome to Skinhaven!</b></h1>
+
+<img source='static/bannerfrontpage.png' alt='Banner will be here'>
+
+<!-- {% if session.username %}
+<p>
+You are logged in as {{ session.username }} <a href="/logout"> Log out </a>
+
+<p>
+<a href="/account/{{ session.username }}"> Your account </a>
+
+{% else %} -->
+<p>
+    Click below to sign up or log in
+<p>
+<form action="/signup" method="GET">
+    <input type="submit" value="Sign up">
+</form>
+
+<p>
+<form action="/login" method="GET">
+    <input type="submit" value="Log In">
+</form>
+{% endif %}
+
+<p>
+<a href="/threads"> Discussion </a>
+
+<p>
+<a href="/skins"> Skins </a>
+
+
+
