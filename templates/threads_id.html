@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<title> Individual thread page </title>
+
+<h1> Discussion {{ messages.topic }} </h1>
+
+<p>
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
+
+<form action="/threads" method="GET">
+    <input type="submit" value="Back">
+</form>
+
+<hr>
+{% for message in messages %}
+{{ message.created.strftime("%d.%m.%Y %H:%M:%S") }} {{ message.creator }}: {{message.content}} <br>
+{% endfor %}
+
+{% if session.username %}
+<form action="/threads/message/new/validate", method="POST">
+<textarea name="message"rows="5" cols="100">
+</textarea> <br>
+<input type="submit" value="Send">
+<input type="hidden" name="thread_id" value="{{messages[0].thread_id}}">
+<input type="hidden" name="creator" value="{{ session.username }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+{% endif %}

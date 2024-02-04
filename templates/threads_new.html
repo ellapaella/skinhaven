@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<title> New thread page </title>
+
+<h1> New thread </h1>
+
+<p>
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
+<form action="/threads" method="GET">
+    <input type="submit" value="Back">
+</form>
+
+{% if session.username %}
+<p>
+<form action="/threads/new/validate" method="POST">
+Topic: <br>
+<input type="text" name="topic" size="50"> <br>
+Contents: <br>
+<textarea name="msg_contents" rows="10" cols="100">
+</textarea> <br>
+<input type="submit" value="Send">
+<input type="hidden" name="creator" value="{{ session.username }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{% else %}
+<p>
+You need to login first to start a discussion
+<form action="/login" method="GET">
+<input type="submit" value="Login">
+</form>
+
+{% endif %}
