@@ -8,14 +8,14 @@ import skinhandler
 import threader
 
 
-#--------- Main Page ---------#
+#--------- Main page ---------#
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
 
-#--------- Signup and Login handling ---------#
+#--------- Signup and login pages ---------#
 
 @app.route("/signup")
 def signup():
