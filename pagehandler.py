@@ -28,7 +28,8 @@ def signup_validate():
 
     try:
         users.signup(username, password)
-        return render_template("signup_success.html")
+        message = "Successfully signed up!"
+        return render_template("return_main_page.html", message = message)
     except Exception as e:
         return render_template("error.html", error=e)
     
