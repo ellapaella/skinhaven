@@ -7,11 +7,13 @@ import users
 import skinhandler
 import threader
 
+
 #--------- Main Page ---------#
 
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 #--------- Signup and Login handling ---------#
 
@@ -19,7 +21,7 @@ def index():
 def signup():
     return render_template("signup.html")
 
-@app.route("/signup/validate", methods=['POST'])
+@app.route("/signup/validate", methods=["POST"])
 def signup_validate():
     username = request.form["username"]
     password = request.form["password"]
@@ -34,7 +36,7 @@ def signup_validate():
 def login():
     return render_template("login.html")
 
-@app.route("/login/validate", methods=['POST'])
+@app.route("/login/validate", methods=["POST"])
 def login_validate():
     username = request.form["username"]
     password = request.form["password"]
@@ -51,6 +53,7 @@ def logout():
     del session["username"]
     del session["csrf_token"]
     return redirect("/")
+
 
 #--------- Account handling ---------#
 
@@ -91,10 +94,11 @@ def account_profiles_new_validate():
 def account_profiles_id(username, profile_number):
     if session["username"] == username:
         profile = users.get_user_profile(username, profile_number)
-        # profile_skins = skinhandler.get_profile_skins(username, profile_number)
-        # return render_template("profile.html", profile=profile, skins=profile_skins)
+        profile_skins = skinhandler.get_profile_skins(username, profile_number)
+        return render_template("profile.html", profile=profile, skins=profile_skins)
     else:
         return render_template("no_credentials.html")
+
 
 #--------- Thread handling ---------#
 
@@ -144,6 +148,7 @@ def message_new_validate():
         return redirect("/threads/"+thread_id)
     except Exception as e:
         return render_template("error.html", error=e)
+
 
 #--------- Skin handling ---------#
 
