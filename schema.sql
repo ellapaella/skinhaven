@@ -1,10 +1,10 @@
 
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY, 
-    created TIMESTAMP, 
+    created TIMESTAMP DEFAULT NOW(), 
     username TEXT, 
     passhash TEXT, 
-    is_admin BOOLEAN
+    is_admin BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE Profiles (

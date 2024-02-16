@@ -5,6 +5,8 @@ from sqlalchemy.sql import text
 from db import db
 
 
+#--------- Signup and login handling methods ---------#
+
 def signup(username, password):
 
     if not _valid_username(username):
@@ -15,11 +17,10 @@ def signup(username, password):
         raise ValueError("Username taken")
     
     passhash = generate_password_hash(password)
-    query = text("INSERT INTO Users (created, username, passhash, is_admin) " \
-                "VALUES (NOW(), :username, :passhash, TRUE)")
+    query = text("INSERT INTO Users (username, passhash) " \
+                "VALUES (:username, :passhash)")
     db.session.execute(query, {"username":username, "passhash":passhash})
     db.session.commit()
-            
 
 def login(username, password):
     query = text("SELECT username, passhash FROM Users " \
@@ -34,6 +35,8 @@ def login(username, password):
         else:
             raise ValueError("Wrong password")
         
+
+#--------- Profile handling methods ---------#
 
 def add_profile(creator, profilename, game):
     if _validate_profile(profilename, game):
