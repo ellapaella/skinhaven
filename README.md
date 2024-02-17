@@ -16,6 +16,7 @@ does not handle any payments or see payment details. The data is sent and verifi
 to a collective skin and NFT database handler before any transaction is finished, 
 to guarantee the safe transfer of ownership (note that this will not be implemented in reality).
 
+
 ### To do list ###
 
 1. Skin handler, browsing skins and transfering ownership to other users
@@ -23,7 +24,7 @@ to guarantee the safe transfer of ownership (note that this will not be implemen
 3. Page layout and cosmetic appearance
 
 
-To test the program locally run the following commands.
+To test the program locally run the following commands:
 
 First make sure you have installed `python3` and `postgresql` in your computer and then run the 
 following in the command line (make sure you are in the desired folder where you want to test the 
@@ -33,19 +34,18 @@ program):
 
 This should produce the skinhaven folder. Traverse there with `cd skinhaven/`and do the following:
 
+
+Create the python virtual environment
+
 `python3 -m venv venv`
+
+Launch the environment
 
 `source venv/bin/activate`
 
-`pip install flask`
+Install necessary requirements
 
-`pip install flask-sqlalchemy`
-
-`pip install psycopg2`
-
-`pip install psycopg2-binary` if above dont work
-
-`pip install python-dotenv`
+`pip install -r requirements.txt`
 
 Now create a database for the project by logging into psql with the command 
 (you must have created a user to the postgreql server first):
@@ -89,6 +89,9 @@ same .env file you created for the database address:
 
 `SECRET_KEY=secret_key`
 
-Now all the prerequisites should be done and you are ready to test the program by running `flask run`
+Now all the prerequisites should be done and you are ready to test the program by running
+
+`flask run`
+
 in the command line (be sure to have activated the python virtual environment) and going to the 
 address 127.0.0.1:5000 with your browser
