@@ -43,20 +43,19 @@ def login_validate():
     password = request.form["password"]
     try:
         users.login(username, password)
-        session["username"] = username
-        session["csrf_token"] = secrets.token_hex(16)
-        return redirect("/")
+        message = "Login successful!"
+        return render_template("return_main_page.html", message=message)
     except Exception as e:
         return render_template("error.html", error=e)
 
 @app.route("/logout")
 def logout():
     del session["username"]
-    del session["csrf_token"]
+    # del session["csrf_token"]
     return redirect("/")
 
 
-#--------- Account handling ---------#
+#--------- Account page ---------#
 
 @app.route("/account/<username>")
 def account(username):
@@ -66,7 +65,8 @@ def account(username):
         skins = users.get_user_skins(username)
         return render_template("account.html", username=username, profiles=profiles, skins=skins, threads=threads)
     else:
-        return render_template("no_credentials.html")
+        message = "You do not have the necessary credentials"
+        return render_template("forbidden.html", message=message)
 
 @app.route("/account/profiles/new")
 def account_profiles_new():

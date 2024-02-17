@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 
-<title>No credentials</title>
+<title> Forbidden </title>
 
-<h1>You do not have required credentials to view this page</h1>
+<h1> Forbidden </h1>
+
+<h2> {{ message }} </h2>
 
 <p>
 <form action="/" method="GET">
     <input type="submit" value="Main Page">
 </form>
+
+{% if not session.username %}
 <form action="/login" method="GET">
     <input type="submit" value="Login">
 </form>
+{% endif %}

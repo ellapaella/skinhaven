@@ -1,6 +1,7 @@
 
 from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
+from flask import session
 
 from db import db
 
@@ -23,7 +24,7 @@ def signup(username, password):
     db.session.commit()
 
 def login(username, password):
-    query = text("SELECT username, passhash FROM Users " \
+    query = text("SELECT id, username, passhash FROM Users " \
                  "WHERE username=:username")
     result = db.session.execute(query, {"username":username})
     user = result.fetchone()
@@ -31,6 +32,9 @@ def login(username, password):
         raise ValueError("No such user")
     else:
         if check_password_hash(user.passhash, password):
+            session["user_id"] = user.id
+            session["username"] = user.username
+            # session["csrf_token"] = secrets.token_hex(16)
             return
         else:
             raise ValueError("Wrong password")

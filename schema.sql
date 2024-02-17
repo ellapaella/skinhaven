@@ -2,7 +2,7 @@
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY, 
     created TIMESTAMP DEFAULT NOW(), 
-    username TEXT, 
+    username TEXT UNIQUE, 
     passhash TEXT, 
     is_admin BOOLEAN DEFAULT FALSE
 );
