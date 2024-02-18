@@ -1,45 +1,63 @@
 <!DOCTYPE html>
 
-<title> {{ username }}'s account </title>
+<title> {{session.username}}'s account </title>
 
-<h1> {{ username }}'s account </h1>
+<h1> {{session.username}}'s account </h1>
 
-<h2> Your threads </h2>
-
-<p>
 <form action="/" method="GET">
     <input type="submit" value="Main Page">
 </form>
 
-<form action="/threads">
-    <input type="submit" value="Go to Threads">
-    </form>
+<h2> Messages </h2>
+
+<form action="/account/{{session.username}}/messages" method="GET">
+    <input type="submit" value="Go to Messages">
+</form>
 
 <p>
-{% for thread in threads %}
-
-<a href="/threads/{{thread.id}}"> {{ thread.topic }} </a>
-{{ thread.created.strftime("%d.%m.%Y %H:%M:%S") }}
-<hr>
+{% for pmessage in pmessages %}
+<p>
+From: {{pmessage.username}} <br>
+Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+Topic: {{pmessage.topic}} <br>
+Message: {{pmessage.contents}} <br>
 {% endfor %}
 
-<h2> Your profiles </h2>
+<hr>
 
-<form action="/account/profiles/new" method="GET">
-<input type="submit" value="New Profile">
+<h2> Last created game profiles </h2>
+
+<form action="/account/{{session.username}}/profiles" method="GET">
+    <input type="submit" value="Go to Profiles">
 </form>
 
 <p>
 {% for profile in profiles %}
-<a href="/account/{{username}}/profiles/{{profile.id}}"> {{ profile.profilename }} </a> <br>
-Created: {{ profile.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
+<p>
+<a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{ profile.profile_name }} </a> <br>
+Created: {{ profile.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
 Game: {{ profile.game }}
     {% for skin in skins %}
         {% if skin.profile_id == profile.id %}
-            Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
+            Created: {{ skin.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
             {{ skin.skin_name }} <br>
             {{ skin.skin_price }}
         {% endif %}
     {% endfor %}
-<hr>
 {% endfor %}
+
+<hr>
+
+<h2> Last created threads </h2>
+
+<form action="/threads">
+    <input type="submit" value="Go to Threads">
+</form>
+
+<p>
+{% for thread in threads %}
+<p>
+<a href="/threads/{{thread.id}}"> {{ thread.topic }} </a>
+{{ thread.created.strftime("%d.%m.%Y %H:%M:%S") }}
+{% endfor %}
+
