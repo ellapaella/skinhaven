@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<title> Message centre </title>
+
+<h1> Messages </h1>
+
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
+
+<form action="/account/{{session.username}}" method="GET">
+    <input type="submit" value="Back to Account">
+</form>
+
+<form action="/account/{{session.username}}/messages/new" method="GET">
+    <input type="submit" value="Compose message">
+</form>
+
+<hr>
+
+<p>
+{% for pmessage in pmessages %}
+<p>
+From: {{pmessage.username}} <br>
+Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+Topic: {{pmessage.topic}} <br>
+Contents: {{pmessage.contents}} <br>
+{% endfor %}

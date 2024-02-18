@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<title> New message </title>
+
+<h1> New message </h1>
+
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
+
+<form action="/account/{{session.username}}" method="GET">
+    <input type="submit" value="Back to Account">
+</form>
+
+<form action="/account/{{session.username}}/messages" method="GET">
+    <input type="submit" value="Back to Messages">
+</form>
+
+<p>
+<form action="/account/{{session.username}}/messages/new/validate" method="POST">
+Send to (Username): <input type="text" name="target_username" size="20"> <br>
+Topic: <input type="text" name="topic" size="50"> <br>
+Message: <br>
+<textarea name="contents" rows="5" cols="50" size="1000">
+</textarea> <br>
+<input type="submit" value="Send">
+<input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+</form>
