@@ -146,6 +146,26 @@ def account_profiles_id(username, profile_id):
     else:
         message = "You do not have the necessary credentials"
         return render_template("forbidden.html", message=message)
+    
+@app.route("/account/<username>/profiles/skin/add", methods=["POST"])
+def add_skin(username):
+    if session["username"] == username:
+        profile_id = request.form["profile_id"]
+        skin_name = request.form["name"]
+        skin_price = request.form["price"]
+        csrf_token = request.form["csrf_token"]
+
+        if csrf_token != session["csrf_token"]:
+            abort(403)
+
+        try:
+            skins.add_skin(session["user_id"], session["user_id"], profile_id, skin_name, skin_price)
+            return redirect("/account/"+session["username"]+"/profiles/"+profile_id)
+        except Exception as e:
+            return render_template("error.html", error=e)
+    else:
+        message = "You do not have the necessary credentials"
+        return render_template("forbidden.html", message=message)
 
 
 #--------- Thread pages ---------#
@@ -198,9 +218,9 @@ def message_new_validate():
 #--------- Skin handling ---------#
 
 @app.route("/skins")
-def skinner():
-    skins = skins.get_all_skins()
-    return render_template("skins.html", skins=skins)
+def skins_all():
+    skns = skins.get_all_skins()
+    return render_template("skins.html", skins=skns)
 
 @app.route("/skins/<int:skin_id>")
 def skinner_id(skin_id):

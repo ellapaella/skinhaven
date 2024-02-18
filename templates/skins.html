@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 
-<title> Skin listing </title>
+<title> Skins </title>
 
-<h1> Available skins </h1>
+<h1> All skins </h1>
+
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
 
 {% for skin in skins %}
-Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }}
-Name: {{ skin.skin_name }}
-Game: {{ skin.game }}
-Owner: {{ skin.username }}
-Price: {{ skin.skin_price }}
+<p>
+Created: {{skin.created.strftime("%d.%m.%Y %H:%M:%S")}} <br>
+Name: {{skin.skin_name}} <br>
+Game: {{skin.game}} <br>
+Owner: {{skin.username}} <br>
+Price: {{skin.skin_price}}
+<hr>
 {% endfor %}

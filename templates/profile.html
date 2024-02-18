@@ -14,8 +14,21 @@
 
 <h3> {{profile.game}}: {{profile.game_username}} </h3>
 
+<p>
+Add new skin to game profile <br>
+<form action="/account/{{session.username}}/profiles/skin/add" method="POST">
+    Skin name: <input type="text" name="name"> <br>
+    Skin price (integer): <input type="text" name="price"> <br>
+    <input type="hidden" name="profile_id" value="{{profile.id}}">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
+    <input type="submit" value="Add skin">
+</form>
+
+<hr>
+
 {% for skin in skins %}
 <p>
-Name: {{ skins.skin_name }}
-Price: {{ skins.skin_price }}
+Original owner: {{skins.owner_id}} <br>
+Name: {{skins.skin_name}} <br>
+Price: {{skins.skin_price}}
 {% endfor %}
