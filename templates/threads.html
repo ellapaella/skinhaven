@@ -18,8 +18,8 @@
 
 <hr>
 {% for thread in threads %}
-<a href="/threads/{{ thread.id }}"> {{ thread.topic }} </a> <br>
-Created at: {{ thread.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
-Creator: {{ thread.username }}
+<a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
+Created at: {{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+Creator: {{thread.username}}
 <hr>
 {% endfor %}

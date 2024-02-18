@@ -174,23 +174,22 @@ def threads_new_validate():
         print(e)
     return redirect("/threads")
 
-@app.route("/threads/<int:id>")
-def threads_id(id):
-    thread_id = id
+@app.route("/threads/<int:thread_id>")
+def threads_id(thread_id):
     msgs = messages.get_thread_messages(thread_id)
     return render_template("threads_id.html", thread_id=thread_id, messages=msgs)
 
 @app.route("/threads/message/new/validate", methods=["POST"])
 def message_new_validate():
-    csrf_token = request.form["csrf_token"]
     thread_id = request.form["thread_id"]
-    msg_contents = request.form["message"]
+    contents = request.form["contents"]
+    csrf_token = request.form["csrf_token"]
 
     if csrf_token != session["csrf_token"]:
         abort(403)
 
     try:
-        threads.add_message(creator, thread_id, msg_contents)
+        messages.add_thread_message(session["user_id"], thread_id, contents)
         return redirect("/threads/"+thread_id)
     except Exception as e:
         return render_template("error.html", error=e)

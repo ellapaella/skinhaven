@@ -34,14 +34,15 @@ Message: {{pmessage.contents}} <br>
 <p>
 {% for profile in profiles %}
 <p>
-<a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{ profile.profile_name }} </a> <br>
+<a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
 Created: {{ profile.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
-Game: {{ profile.game }}
+Game: {{profile.game}} <br>
+Username: {{profile.game_username}} <br>
     {% for skin in skins %}
         {% if skin.profile_id == profile.id %}
-            Created: {{ skin.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
-            {{ skin.skin_name }} <br>
-            {{ skin.skin_price }}
+            Created: {{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+            {{skin.skin_name}} <br>
+            {{skin.skin_price}}
         {% endif %}
     {% endfor %}
 {% endfor %}
@@ -57,7 +58,7 @@ Game: {{ profile.game }}
 <p>
 {% for thread in threads %}
 <p>
-<a href="/threads/{{thread.id}}"> {{ thread.topic }} </a>
-{{ thread.created.strftime("%d.%m.%Y %H:%M:%S") }}
+<a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
+{{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
 {% endfor %}
 

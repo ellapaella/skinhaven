@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<title> New thread page </title>
+<title> New thread </title>
 
 <h1> New thread </h1>
 
@@ -18,10 +18,9 @@
 Topic: <br>
 <input type="text" name="topic" size="50"> <br>
 Contents: <br>
-<textarea name="msg_contents" rows="10" cols="100">
+<textarea name="contents" rows="10" cols="100">
 </textarea> <br>
 <input type="submit" value="Send">
-<input type="hidden" name="creator" value="{{ session.username }}">
 <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 

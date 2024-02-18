@@ -40,10 +40,13 @@ def add_private_message(creator_id, target_id, topic, contents):
 #--------- Thread message methods ---------#
     
 def get_thread_messages(thread_id):
-    query = text("SELECT * FROM Messages " \
-                 "WHERE Messages.thread_id = :id " \
-                 "ORDER BY Messages.created DESC")
-    result = db.session.execute(query, {"id":thread_id})
+    query = text("SELECT M.created, M.creator_id, M.thread_id, M.contents, U.username, T.topic " \
+                "FROM Threadmessages M, Users U, Threads T " \
+                "WHERE M.thread_id = :thread_id " \
+                "AND M.creator_id = U.id " \
+                "AND M.thread_id = T.id "
+                "ORDER BY M.created DESC")
+    result = db.session.execute(query, {"thread_id":thread_id})
     messages = result.fetchall()
     return messages
 
@@ -53,7 +56,7 @@ def add_thread_message(creator_id, thread_id, contents):
     
     query = text("INSERT INTO Threadmessages (creator_id, thread_id, contents) " \
                 "VALUES (:creator_id, :thread_id, :contents)")
-    vars = {"creator_id":creator_id, "thread_id":thread_id, "content":contents}
+    vars = {"creator_id":creator_id, "thread_id":thread_id, "contents":contents}
     db.session.execute(query, vars)
     db.session.commit()
 
