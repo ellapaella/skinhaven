@@ -17,17 +17,18 @@
 </form>
 
 <p>
-    {% for profile in profiles %}
-    <p>
-    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{ profile.profile_name }} </a> <br>
-    Created: {{ profile.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
-    Game: {{ profile.game }}
-        {% for skin in skins %}
-            {% if skin.profile_id == profile.id %}
-                Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
-                {{ skin.skin_name }} <br>
-                {{ skin.skin_price }}
-            {% endif %}
-        {% endfor %}
+{% for profile in profiles %}
+<p>
+<a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
+Created: {{profile.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+Game: {{profile.game}} <br>
+Username: {{profile.game_username}} <br>
+    {% for skin in skins %}
+        {% if skin.profile_id == profile.id %}
+            Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
+            {{skin.skin_name}} <br>
+            {{skin.skin_price }}
+        {% endif %}
     {% endfor %}
+{% endfor %}
     

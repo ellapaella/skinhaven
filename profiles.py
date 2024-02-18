@@ -5,17 +5,26 @@ from db import db
 
 #--------- Game profile handling methods ---------#
 
+def get_user_profile(user_id, profile_id):
+    query = text("SELECT id, created, user_id, profile_name, game_username, game " \
+                "FROM Profiles " \
+                "WHERE user_id = :user_id " \
+                "AND id = :profile_id")
+    result = db.session.execute(query, {"user_id":user_id, "profile_id":profile_id})
+    profile = result.fetchone()
+    return profile
+
 def get_user_profiles(user_id, count):
     if count == 0:
         query = text("SELECT id, created, user_id, profile_name, game_username, game " \
                     "FROM Profiles " \
-                    "WHERE Profiles.user_id = :user_id " \
+                    "WHERE user_id = :user_id " \
                     "ORDER BY created DESC")
         result = db.session.execute(query, {"user_id":user_id})
     else:
         query = text("SELECT id, created, user_id, profile_name, game_username, game " \
                     "FROM Profiles " \
-                    "WHERE Profiles.user_id = :user_id " \
+                    "WHERE user_id = :user_id " \
                     "ORDER BY created DESC " \
                     "LIMIT :count")
         result = db.session.execute(query, {"user_id":user_id, "count":count})

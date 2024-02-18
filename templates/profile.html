@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 
-<title> {{ profile }} </title>
+<title> Profile info </title>
 
-<h1> {{ profile.profilename }}: {{ profile.game }} </h1>
+<h2> Game profile info </h2>
 
-<h2> Your profile skins </h2>
+<form action="/" method="GET">
+    <input type="submit" value="Main Page">
+</form>
+
+<form action="/account/{{session.username}}" method="GET">
+    <input type="submit" value="Back to Account">
+</form>
+
+<h3> {{profile.game}}: {{profile.game_username}} </h3>
 
 {% for skin in skins %}
+<p>
 Name: {{ skins.skin_name }}
 Price: {{ skins.skin_price }}
 {% endfor %}

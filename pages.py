@@ -58,10 +58,10 @@ def logout():
 @app.route("/account/<username>")
 def account(username):
     if username == session["username"]:
-        pmsgs = messages.get_user_pmessages(session["user_id"], 5)
-        profs = profiles.get_user_profiles(session["user_id"], 5)
+        pmsgs = messages.get_user_pmessages(session["user_id"], 3)
+        profs = profiles.get_user_profiles(session["user_id"], 3)
         skns = skins.get_user_skins(session["user_id"])
-        thrds = threads.get_user_threads(session["user_id"], 5)
+        thrds = threads.get_user_threads(session["user_id"], 3)
         return render_template("account.html", pmessages=pmsgs, profiles=profs, skins=skns, threads=thrds)
     else:
         message = "You do not have the necessary credentials"
