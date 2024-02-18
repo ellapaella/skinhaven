@@ -4,11 +4,12 @@
 
 ### On this site you can:
 
-1. Create a user account for the hub
-2. Discuss about gaming skins with other enthusiasts
-3. Browse available skins
-4. Buy skins from others, transfering the ownership to you
-5. Sell your skins to others in a safe and secure way
+1. Create user account for the hub
+2. Create game profiles
+3. Add your skins to your game profiles and listing for sale
+4. Discuss about games and gaming skins with other enthusiasts
+5. Browse available skins
+6. Trade skins with others
 
 
 The trading of skins is implemented on a 3rd party service provider and the site 
@@ -17,14 +18,14 @@ to a collective skin and NFT database handler before any transaction is finished
 to guarantee the safe transfer of ownership (note that this will not be implemented in reality).
 
 
-### To do list ###
+### Work still under development. To-do list below. ###
 
-1. Skin handler, browsing skins and transfering ownership to other users
-2. Private messaging between users
-3. Page layout and cosmetic appearance
+1. Finalize skin listing and trading to be able to transfer ownership and search skins
+2. Page layout and cosmetic appearance
+3. Other small adjustments
 
 
-To test the program locally run the following commands:
+If you want to test the program locally do the following:
 
 First make sure you have installed `python3` and `postgresql` in your computer and then run the 
 following in the command line (make sure you are in the desired folder where you want to test the 
@@ -32,7 +33,7 @@ program):
 
 `git clone https://www.github.com/ellapaella/skinhaven`
 
-This should produce the skinhaven folder. Traverse there with `cd skinhaven/`and do the following:
+This should produce the skinhaven folder. Traverse there with `cd skinhaven/`and do the following in terminal:
 
 
 Create the python virtual environment
@@ -47,19 +48,15 @@ Install necessary requirements
 
 `pip install -r requirements.txt`
 
-Now create a database for the project by logging into psql with the command 
-(you must have created a user to the postgreql server first):
+Create a database for the project in psql
 
-`psql`
-
-Now run the following command replacing the "name_of_database" with a name of your choosing (i.e. 
-skinhaven):
+In psql run the following command replacing the "name_of_database" with a name of your choosing (i.e. skinhaven):
 
 `CREATE DATABASE name_of_database;`
 
 This should create a database for the project.
 
-Now return to command line with the `\q` and feed your database with the schema.sql file you 
+Now return to command line with the `\q` and feed your database with the `schema.sql` file you 
 downloaded with the project. Use the following command (again inserting the name of database here, 
 otherwise it will create the tables to your default database which most likely will be your username):
 
@@ -89,7 +86,7 @@ same .env file you created for the database address:
 
 `SECRET_KEY=secret_key`
 
-Now all the prerequisites should be done and you are ready to test the program by running
+Now all the prerequisites should be done and you are ready to test the program by typing:
 
 `flask run`
 
