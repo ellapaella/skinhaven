@@ -76,7 +76,7 @@ def account_messages(username):
 @app.route("/account/<username>/messages/new")
 def account_messages_new(username):
     if username == session["username"]:
-        return render_template("pmessages_new.html")
+        return render_template("pmessage_new.html")
     
 @app.route("/account/<username>/messages/new/validate", methods=["POST"])
 def account_messages_new_validate(username):
@@ -140,9 +140,9 @@ def account_profiles_new_validate(username):
 @app.route("/account/<username>/profiles/<int:profile_id>")
 def account_profiles_id(username, profile_id):
     if session["username"] == username:
-        profile = profiles.get_user_profile(session["user_id"], profile_id)
+        prof = profiles.get_user_profile(session["user_id"], profile_id)
         profile_skins = skins.get_profile_skins(session["user_id"], profile_id)
-        return render_template("profile.html", profile=profile, skins=profile_skins)
+        return render_template("profile.html", profile=prof, skins=profile_skins)
     else:
         message = "You do not have the necessary credentials"
         return render_template("forbidden.html", message=message)
@@ -177,7 +177,7 @@ def threads_all():
 
 @app.route("/threads/new")
 def threads_new():
-    return render_template("threads_new.html")
+    return render_template("thread_new.html")
 
 @app.route("/threads/new/validate", methods=["POST"])
 def threads_new_validate():
@@ -197,7 +197,7 @@ def threads_new_validate():
 @app.route("/threads/<int:thread_id>")
 def threads_id(thread_id):
     msgs = messages.get_thread_messages(thread_id)
-    return render_template("threads_id.html", thread_id=thread_id, messages=msgs)
+    return render_template("thread.html", thread_id=thread_id, messages=msgs)
 
 @app.route("/threads/message/new/validate", methods=["POST"])
 def message_new_validate():

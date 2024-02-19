@@ -1,28 +1,39 @@
 <!DOCTYPE html>
+<html>
 
-<title> Message centre </title>
+<head>
+  <meta charset="utf-8">
+  <title> Message centre </title>
+</head>
 
-<h1> Messages </h1>
+<body>
+  <h1> Messages </h1>
 
-<form action="/" method="GET">
+  <p>
+  <form action="/" method="GET">
     <input type="submit" value="Main Page">
-</form>
+  </form>
 
-<form action="/account/{{session.username}}" method="GET">
+  <p>
+  <form action="/account/{{session.username}}" method="GET">
     <input type="submit" value="Back to Account">
-</form>
+  </form>
 
-<form action="/account/{{session.username}}/messages/new" method="GET">
+  <p>
+  <form action="/account/{{session.username}}/messages/new" method="GET">
     <input type="submit" value="Compose message">
-</form>
+  </form>
 
-<hr>
+  <hr>
 
-<p>
-{% for pmessage in pmessages %}
-<p>
-From: {{pmessage.username}} <br>
-Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
-Topic: {{pmessage.topic}} <br>
-Contents: {{pmessage.contents}} <br>
-{% endfor %}
+  <p>
+    {% for pmessage in pmessages %}
+  <p>
+    From: {{pmessage.username}} <br>
+    Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+    Topic: {{pmessage.topic}} <br>
+    Contents: {{pmessage.contents}} <br>
+    {% endfor %}
+</body>
+
+</html>
