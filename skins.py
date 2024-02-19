@@ -25,10 +25,11 @@ def get_profile_skins(user_id, profile_id):
     return skins
 
 def get_all_skins():
-    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, S.skin_price " \
-                "FROM Skins S, Profiles P, Users U " \
+    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, S.skin_price, U.username AS owner, P.game " \
+                "FROM Skins S, Users U, Profiles P " \
                 "WHERE S.owner_id = U.id " \
-                "AND S.profile_id = P.id")
+                "AND S.profile_id = P.id " \
+                "ORDER BY S.created DESC")
     result = db.session.execute(query)
     skins = result.fetchall()
     return skins

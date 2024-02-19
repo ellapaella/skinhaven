@@ -227,5 +227,5 @@ def skins_all():
     return render_template("skins.html", skins=skns)
 
 @app.route("/skins/<int:skin_id>")
-def skinner_id(skin_id):
+def skin_id(skin_id):
     pass
