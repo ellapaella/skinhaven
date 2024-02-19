@@ -1,34 +1,49 @@
 <!DOCTYPE html>
+<html>
 
-<title> Profile info </title>
+<head>
+  <meta charset="utf-8">
+  <title> Profile info </title>
+</head>
 
-<h2> Game profile info </h2>
+<body>
+  <h2> Game profile info </h2>
 
-<form action="/" method="GET">
+  <p>
+  <form action="/" method="GET">
     <input type="submit" value="Main Page">
-</form>
+  </form>
 
-<form action="/account/{{session.username}}" method="GET">
+  <p>
+  <form action="/account/{{session.username}}" method="GET">
     <input type="submit" value="Back to Account">
-</form>
+  </form>
 
-<h3> {{profile.game}}: {{profile.game_username}} </h3>
+  <p>
+    <form action="/account/{{session.username}}/profiles" method="GET">
+      <input type="submit" value="Back to Profiles">
+    </form>
 
-<p>
-Add new skin to game profile <br>
-<form action="/account/{{session.username}}/profiles/skin/add" method="POST">
+  <h3> {{profile.game}}: {{profile.game_username}} </h3>
+
+  <p>
+    Add new skin to game profile <br>
+  <form action="/account/{{session.username}}/profiles/skin/add" method="POST">
     Skin name: <input type="text" name="name"> <br>
     Skin price (integer): <input type="text" name="price"> <br>
     <input type="hidden" name="profile_id" value="{{profile.id}}">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <input type="submit" value="Add skin">
-</form>
+  </form>
 
-<hr>
+  <hr>
 
-{% for skin in skins %}
-<p>
-Original owner: {{skins.owner_id}} <br>
-Name: {{skins.skin_name}} <br>
-Price: {{skins.skin_price}}
-{% endfor %}
+  {% for skin in skins %}
+  <p>
+    Original owner: {{skins.creator_name}} <br>
+    Name: {{skins.skin_name}} <br>
+    Price: {{skins.skin_price}}
+    {% endfor %}
+</body>
+
+</html>

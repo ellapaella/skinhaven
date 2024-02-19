@@ -1,14 +1,32 @@
 <!DOCTYPE html>
+<html>
 
-<title> Create new game profile </title>
+<head>
+  <meta charset="utf-8">
+  <title> Create new game profile </title>
+</head>
 
-<h1> Create new game profile </h1>
+<body>
+  <h1> Create new game profile </h1>
 
-<p>
-<form action="/account/{{session.username}}/profiles/new/validate" method="POST">
+  <p>
+  <form action="/" method="GET">
+    <input type="submit" value="Main Page">
+  </form>
+
+  <p>
+  <form action="/account/{{session.username}}/profiles" method="GET">
+    <input type="submit" value="Back to Profiles">
+  </form>
+
+  <p>
+  <form action="/account/{{session.username}}/profiles/new/validate" method="POST">
     Profile name: <input type="text" name="profile_name" size="50"> <br>
     Game username: <input type="text" name="game_username" size="50"> <br>
     Game: <input type="text" name="game" size="30"> <br>
     <input type="submit" value="Create">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-</form>
+  </form>
+</body>
+
+</html>

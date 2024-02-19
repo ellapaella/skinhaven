@@ -1,37 +1,42 @@
 <!DOCTYPE html>
+<html>
 
-<title>Skinhaven - THE place for trading gaming skins worldwide</title>
+<head>
+  <meta charset="utf-8">
+  <title>Skinhaven - THE place for trading gaming skins worldwide</title>
+</head>
 
-<h1><b>Welcome to Skinhaven!</b></h1>
+<body>
+  <h1><b>Welcome to Skinhaven!</b></h1>
 
-<img source='static/bannerfrontpage.png' alt='Banner will be here'>
+  <img source='static/bannerfrontpage.png' alt='Banner will be here'>
 
-{% if session.username %}
-<p>
-You are logged in as {{ session.username }} <a href="/logout"> Log out </a>
+  {% if session.username %}
+  <p>
+    You are logged in as <b>{{ session.username }}</b> <a href="/logout"> Log out </a>
 
-<p>
-<a href="/account/{{ session.username }}"> Your account </a>
+  <p>
+    <a href="/account/{{session.username}}"> Your account </a>
 
-{% else %}
-<p>
+    {% else %}
+  <p>
     Click below to sign up or log in
-<p>
-<form action="/signup" method="GET">
+  <p>
+  <form action="/signup" method="GET">
     <input type="submit" value="Sign up">
-</form>
+  </form>
 
-<p>
-<form action="/login" method="GET">
+  <p>
+  <form action="/login" method="GET">
     <input type="submit" value="Log In">
-</form>
-{% endif %}
+  </form>
+  {% endif %}
 
-<p>
-<a href="/threads"> Discussion </a>
+  <p>
+    <a href="/threads"> Discussion </a>
 
-<p>
-<a href="/skins"> Skins </a>
+  <p>
+    <a href="/skins"> Skins </a>
+</body>
 
-
-
+</html>

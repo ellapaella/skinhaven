@@ -1,64 +1,75 @@
 <!DOCTYPE html>
+<html>
 
-<title> {{session.username}}'s account </title>
+<head>
+  <meta charset="utf-8">
+  <title> {{session.username}}'s account </title>
+</head>
 
-<h1> {{session.username}}'s account </h1>
+<body>
+  <h1> {{session.username}}'s account </h1>
 
-<form action="/" method="GET">
+  <p>
+  <form action="/" method="GET">
     <input type="submit" value="Main Page">
-</form>
+  </form>
 
-<h2> Messages </h2>
+  <h2> Messages </h2>
 
-<form action="/account/{{session.username}}/messages" method="GET">
+  <form action="/account/{{session.username}}/messages" method="GET">
     <input type="submit" value="Go to Messages">
-</form>
+  </form>
 
-<p>
-{% for pmessage in pmessages %}
-<p>
-From: {{pmessage.username}} <br>
-Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
-Topic: {{pmessage.topic}} <br>
-Message: {{pmessage.contents}} <br>
-{% endfor %}
-
-<hr>
-
-<h2> Last created game profiles </h2>
-
-<form action="/account/{{session.username}}/profiles" method="GET">
-    <input type="submit" value="Go to Profiles">
-</form>
-
-<p>
-{% for profile in profiles %}
-<p>
-<a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
-Created: {{ profile.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
-Game: {{profile.game}} <br>
-Username: {{profile.game_username}} <br>
-    {% for skin in skins %}
-        {% if skin.profile_id == profile.id %}
-            Created: {{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
-            {{skin.skin_name}} <br>
-            {{skin.skin_price}}
-        {% endif %}
+  <p>
+    {% for pmessage in pmessages %}
+  <p>
+    From: {{pmessage.username}} <br>
+    Sent: {{pmessage.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+    Topic: {{pmessage.topic}} <br>
+    Message: {{pmessage.contents}} <br>
     {% endfor %}
-{% endfor %}
 
-<hr>
+    <hr>
 
-<h2> Last created threads </h2>
+  <h2> Last created game profiles </h2>
 
-<form action="/threads">
+  <form action="/account/{{session.username}}/profiles" method="GET">
+    <input type="submit" value="Go to Profiles">
+  </form>
+
+  <p>
+    {% for profile in profiles %}
+  <p>
+    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
+    Created: {{ profile.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
+    Game: {{profile.game}} <br>
+    Username: {{profile.game_username}} <br>
+
+  <p>
+    Profile skins: <br>
+  <ul>
+    {% for skin in skins %}
+    {% if skin.profile_id == profile.id %}
+    <li> {{skin.skin_name}}, {{skin.skin_price}} euros ({{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}})
+      {% endif %}
+      {% endfor %}
+  </ul>
+  {% endfor %}
+
+  <hr>
+
+  <h2> Last created threads </h2>
+
+  <form action="/threads">
     <input type="submit" value="Go to Threads">
-</form>
+  </form>
 
-<p>
-{% for thread in threads %}
-<p>
-<a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
-{{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
-{% endfor %}
+  <p>
+    {% for thread in threads %}
+  <p>
+    <a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
+    {{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+    {% endfor %}
+</body>
 
+</html>

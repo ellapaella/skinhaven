@@ -1,18 +1,26 @@
 <!DOCTYPE html>
+<html>
 
-<title> Error </title>
+<head>
+  <meta charset="utf-8">
+  <title> Error </title>
+</head>
 
-<h1> Error </h1>
+<body>
+  <h1> Error </h1>
 
-<h2> {{ error }} </h2>
+  <h2> {{ error }} </h2>
 
-<p>
-<form action="/" method="GET">
+  <p>
+  <form action="/" method="GET">
     <input type="submit" value="Main Page">
-</form>
+  </form>
 
-{% if not session.username %}
-<form action="/login" method="GET">
+  {% if not session.username %}
+  <form action="/login" method="GET">
     <input type="submit" value="Login">
-</form>
-{% endif %}
+  </form>
+  {% endif %}
+</body>
+
+</html>

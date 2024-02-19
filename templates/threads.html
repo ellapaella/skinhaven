@@ -1,25 +1,33 @@
 <!DOCTYPE html>
+<html>
 
-<title> Thread listing </title>
+<head>
+  <meta charset="utf-8">
+  <title> Thread listing </title>
+</head>
 
-<h1> Discussion board </h1>
+<body>
+  <h1> Discussion board </h1>
 
-<p>
-    <form action="/" method="GET">
-        <input type="submit" value="Main Page">
-    </form>
+  <p>
+  <form action="/" method="GET">
+    <input type="submit" value="Main Page">
+  </form>
 
-{% if session.username %}
-<p>
-    <form action="/threads/new" method="GET">
-        <input type="submit" value="New Discussion">
-    </form>
-{% endif %}
+  {% if session.username %}
+  <p>
+  <form action="/threads/new" method="GET">
+    <input type="submit" value="New Discussion">
+  </form>
+  {% endif %}
 
-<hr>
-{% for thread in threads %}
-<a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
-Created at: {{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
-Creator: {{thread.username}}
-<hr>
-{% endfor %}
+  <hr>
+  {% for thread in threads %}
+  <a href="/threads/{{thread.id}}"> {{thread.topic}} </a> <br>
+  Created at: {{thread.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
+  Creator: {{thread.username}}
+  <hr>
+  {% endfor %}
+</body>
+
+</html>

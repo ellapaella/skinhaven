@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> Discussion </title>
+</head>
+
+<body>
+  <h1> Discussion board </h1>
+
+  <p>
+  <form action="/" method="GET">
+    <input type="submit" value="Main Page">
+  </form>
+
+  <p>
+  <form action="/threads" method="GET">
+    <input type="submit" value="Back to Discussions">
+  </form>
+
+  <hr>
+  {% for message in messages %}
+  {{message.created.strftime("%d.%m.%Y, %H:%M:%S")}} {{message.username}}: {{message.contents}} <br>
+  {% endfor %}
+
+  {% if session.username %}
+  <form action="/threads/message/new/validate" , method="POST">
+    <input type="hidden" name="thread_id" value="{{messages[0].thread_id}}">
+    <textarea name="contents" rows="5" cols="100">
+</textarea> <br>
+    <input type="submit" value="Send">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
+  {% endif %}
+</body>
+
+</html>
