@@ -6,7 +6,7 @@ from db import db
 #--------- Skin handling methods ---------#
 
 def get_user_skins(user_id):
-    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, S.skin_price, U.username " \
+    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, S.skin_price, U.username AS creator " \
                 "FROM Skins S, Users U " \
                 "WHERE S.owner_id = :user_id " \
                 "AND S.creator_id = U.id")
@@ -15,11 +15,11 @@ def get_user_skins(user_id):
     return skins
 
 def get_profile_skins(user_id, profile_id):
-    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, s.skin_price, U.username " \
+    query = text("SELECT S.created, S.creator_id, S.owner_id, S.profile_id, S.skin_name, S.skin_price, U.username AS creator " \
                 "FROM Skins S, Users U " \
                 "WHERE S.owner_id = :user_id " \
-                "AND profile_id = :profile_id " \
-                "AND S.creator_id = U.id")
+                "AND S.creator_id = U.id " \
+                "AND S.profile_id = :profile_id")
     result = db.session.execute(query, {"user_id":user_id, "profile_id":profile_id})
     skins = result.fetchall()
     return skins
@@ -40,8 +40,8 @@ def add_skin(creator_id, owner_id, profile_id, skin_name, skin_price):
     skin = db.session.execute(query, vars)
     db.session.commit()
 
-def change_skin_owner():
+def change_skin_owner(skin_id, new_owner_id):
     pass
 
-def change_skin_price():
+def change_skin_price(skin_id, new_price):
     pass

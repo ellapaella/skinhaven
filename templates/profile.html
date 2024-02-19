@@ -20,9 +20,9 @@
   </form>
 
   <p>
-    <form action="/account/{{session.username}}/profiles" method="GET">
-      <input type="submit" value="Back to Profiles">
-    </form>
+  <form action="/account/{{session.username}}/profiles" method="GET">
+    <input type="submit" value="Back to Profiles">
+  </form>
 
   <h3> {{profile.game}}: {{profile.game_username}} </h3>
 
@@ -30,7 +30,7 @@
     Add new skin to game profile <br>
   <form action="/account/{{session.username}}/profiles/skin/add" method="POST">
     Skin name: <input type="text" name="name"> <br>
-    Skin price (integer): <input type="text" name="price"> <br>
+    Skin price: <input type="text" name="price"> <br>
     <input type="hidden" name="profile_id" value="{{profile.id}}">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <input type="submit" value="Add skin">
@@ -38,12 +38,18 @@
 
   <hr>
 
-  {% for skin in skins %}
   <p>
-    Original owner: {{skins.creator_name}} <br>
-    Name: {{skins.skin_name}} <br>
-    Price: {{skins.skin_price}}
-    {% endfor %}
+    {{profile.game_username}}'s skins: <br>
+  <ul>
+    {% for skin in skins %}
+    <p>
+      <li>
+        Name: {{skin.skin_name}} <br>
+        Price: {{skin.skin_price}} <br>
+        Original owner: {{skin.creator}}
+      </li>
+      {% endfor %}
+  </ul>
 </body>
 
 </html>

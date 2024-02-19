@@ -40,8 +40,8 @@
   <p>
     {% for profile in profiles %}
   <p>
-    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
-    Created: {{ profile.created.strftime("%d.%m.%Y, %H:%M:%S") }} <br>
+    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> <b>{{profile.profile_name}}</b> </a> <br>
+    Created: {{profile.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
     Game: {{profile.game}} <br>
     Username: {{profile.game_username}} <br>
 
@@ -50,7 +50,10 @@
   <ul>
     {% for skin in skins %}
     {% if skin.profile_id == profile.id %}
-    <li> {{skin.skin_name}}, {{skin.skin_price}} euros ({{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}})
+    <p>
+      <li> <b>{{skin.skin_name}}</b>, {{skin.skin_price}} euros ({{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}})<br>
+        Original owner: {{skin.creator}}
+      </li>
       {% endif %}
       {% endfor %}
   </ul>

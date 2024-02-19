@@ -66,6 +66,8 @@ def account(username):
     else:
         message = "You do not have the necessary credentials"
         return render_template("forbidden.html", message=message)
+    
+#--------- Account: Message pages---------#
 
 @app.route("/account/<username>/messages")
 def account_messages(username):
@@ -98,6 +100,8 @@ def account_messages_new_validate(username):
     else:
         message = "You do not have the necessary credentials"
         return render_template("forbidden.html", message=message)
+
+#--------- Account: Profile pages---------#
 
 @app.route("/account/<username>/profiles")
 def account_profiles(username):
@@ -141,8 +145,8 @@ def account_profiles_new_validate(username):
 def account_profiles_id(username, profile_id):
     if session["username"] == username:
         prof = profiles.get_user_profile(session["user_id"], profile_id)
-        profile_skins = skins.get_profile_skins(session["user_id"], profile_id)
-        return render_template("profile.html", profile=prof, skins=profile_skins)
+        skns = skins.get_profile_skins(session["user_id"], profile_id)
+        return render_template("profile.html", profile=prof, skins=skns)
     else:
         message = "You do not have the necessary credentials"
         return render_template("forbidden.html", message=message)

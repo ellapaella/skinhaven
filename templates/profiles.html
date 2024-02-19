@@ -24,21 +24,29 @@
     <input type="submit" value="New Profile">
   </form>
 
+  <hr>
+
   <p>
     {% for profile in profiles %}
   <p>
-    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> {{profile.profile_name}} </a> <br>
+    <a href="/account/{{session.username}}/profiles/{{profile.id}}"> <b>{{profile.profile_name}}</b> </a> <br>
     Created: {{profile.created.strftime("%d.%m.%Y, %H:%M:%S")}} <br>
     Game: {{profile.game}} <br>
     Username: {{profile.game_username}} <br>
+
+  <p>
+    Profile skins: <br>
+  <ul>
     {% for skin in skins %}
     {% if skin.profile_id == profile.id %}
-    Created: {{ skin.created.strftime("%d.%m.%Y %H:%M:%S") }} <br>
-    {{skin.skin_name}} <br>
-    {{skin.skin_price }}
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
+    <p>
+      <li> <b>{{skin.skin_name}}</b>, {{skin.skin_price}} euros ({{skin.created.strftime("%d.%m.%Y, %H:%M:%S")}})<br>
+        Original owner: {{skin.creator}}
+      </li>
+      {% endif %}
+      {% endfor %}
+  </ul>
+  {% endfor %}
 </body>
 
 </html>
