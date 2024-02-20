@@ -58,6 +58,13 @@ def get_user_name(id):
     username = result.fetchone()[0]
     return username
 
+def get_usernamelist():
+    query = text("SELECT username " \
+                "FROM Users")
+    result = db.session.execute(query)
+    usernamelist = result.fetchall()
+    return usernamelist
+
 
 #--------- Private validation methods ---------#
 

@@ -25,12 +25,12 @@
   {% endfor %}
 
   {% if session.username %}
-  <form action="/threads/message/new/validate" , method="POST">
+  <form action="/threads/message/new/validate", method="POST">
     <input type="hidden" name="thread_id" value="{{messages[0].thread_id}}">
-    <textarea name="contents" rows="5" cols="100">
+    <textarea name="contents" rows="5" cols="100" minlength="1" maxlength="1000" required>
 </textarea> <br>
     <input type="submit" value="Send">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
   </form>
   {% endif %}
 </body>

@@ -29,8 +29,9 @@
   <p>
     Add new skin to game profile <br>
   <form action="/account/{{session.username}}/profiles/skin/add" method="POST">
-    Skin name: <input type="text" name="name"> <br>
-    Skin price: <input type="text" name="price"> <br>
+    Skin name: <input type="text" name="name" minlength="" maxlength="" required> <br>
+    Skin price: <input type="number" name="price" min="1" max="1000" required> <br>
+    (We currently only accept a listing price of max. 1000 euros) <br>
     <input type="hidden" name="profile_id" value="{{profile.id}}">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
     <input type="submit" value="Add skin">

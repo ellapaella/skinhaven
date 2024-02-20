@@ -17,9 +17,9 @@
   <form action="/login/validate" method="POST">
     <p>
       Username: <br>
-      <input type="text" name="username"> <br>
+      <input type="text" name="username" minlength="3" maxlength="20" required> <br>
       Password: <br>
-      <input type="password" name="password"> <br>
+      <input type="password" name="password" minlength="8" maxlength="100" required> <br>
       <input type="submit" value="Login">
   </form>
 </body>

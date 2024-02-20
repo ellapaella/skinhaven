@@ -78,7 +78,8 @@ def account_messages(username):
 @app.route("/account/<username>/messages/new")
 def account_messages_new(username):
     if username == session["username"]:
-        return render_template("pmessage_new.html")
+        usernamelist = users.get_usernamelist()
+        return render_template("pmessage_new.html", usernames=usernamelist)
     
 @app.route("/account/<username>/messages/new/validate", methods=["POST"])
 def account_messages_new_validate(username):

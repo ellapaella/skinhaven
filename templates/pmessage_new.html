@@ -26,11 +26,17 @@
 
   <p>
   <form action="/account/{{session.username}}/messages/new/validate" method="POST">
-    Send to (Username): <input type="text" name="target_username" size="20"> <br>
-    Topic: <input type="text" name="topic" size="50"> <br>
+    Send to:
+    <select name="target_username">
+      {% for username in usernames %}
+      {% if username.username != session.username %}
+      <option value={{username.username}}> {{username.username}}
+        {% endif %}
+        {% endfor %}
+    </select> <br>
+    Topic: <input type="text" name="topic" size="50" minlength="1" maxlength="50" required> <br>
     Message: <br>
-    <textarea name="contents" rows="5" cols="50" size="1000">
-</textarea> <br>
+    <textarea name="contents" rows="5" cols="50" size="1000" minlength="1" maxlength="1000" required></textarea> <br>
     <input type="submit" value="Send">
     <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
   </form>

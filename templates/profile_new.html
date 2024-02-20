@@ -21,11 +21,11 @@
 
   <p>
   <form action="/account/{{session.username}}/profiles/new/validate" method="POST">
-    Profile name: <input type="text" name="profile_name" size="50"> <br>
-    Game username: <input type="text" name="game_username" size="50"> <br>
-    Game: <input type="text" name="game" size="30"> <br>
+    Profile name: <input type="text" name="profile_name" size="50" minlength="1" maxlength="50" required> <br>
+    Game username: <input type="text" name="game_username" size="50" minlength="1" maxlength="50" required> <br>
+    Game: <input type="text" name="game" size="30" minlength="1" maxlength="100" required> <br>
     <input type="submit" value="Create">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
   </form>
 </body>
 

@@ -48,8 +48,8 @@ def add_profile(user_id, profile_name, game_username, game):
 #--------- Private game profile validation methods ---------#
 
 def _valid_game_profile(profile_name, game_username, game):
-    if len(profile_name) >= 3 and len(profile_name) <= 50:
-        if len(game_username) >= 3 and len(game_username) <= 50:
+    if len(profile_name) >= 1 and len(profile_name) <= 50:
+        if len(game_username) >= 1 and len(game_username) <= 50:
             if len(game) >= 1 and len(game) <= 100:
                 return True
     return False

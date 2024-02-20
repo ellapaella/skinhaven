@@ -35,10 +35,13 @@ def get_all_skins():
     return skins
 
 def add_skin(creator_id, owner_id, profile_id, skin_name, skin_price):
+    if not _valid_skin(skin_name, skin_price):
+        raise ValueError("Skin name must be between 1 and 50 characters")
+    
     query = text("INSERT INTO Skins (creator_id, owner_id, profile_id, skin_name, skin_price) " \
                 "VALUES (:creator_id, :owner_id, :profile_id, :skin_name, :skin_price) ")
     vars = {"creator_id":creator_id, "owner_id":owner_id, "profile_id":profile_id, "skin_name":skin_name, "skin_price":skin_price}
-    skin = db.session.execute(query, vars)
+    db.session.execute(query, vars)
     db.session.commit()
 
 def change_skin_owner(skin_id, new_owner_id):
@@ -46,3 +49,11 @@ def change_skin_owner(skin_id, new_owner_id):
 
 def change_skin_price(skin_id, new_price):
     pass
+
+#--------- Private skin validation methods ---------#
+
+def _valid_skin(skin_name, skin_price):
+    if len(skin_name) >= 1 and len(skin_name) <= 50:
+        if int(skin_price) >= 1 and int(skin_price) <= 1000:
+            return True
+    return False

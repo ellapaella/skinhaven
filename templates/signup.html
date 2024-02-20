@@ -17,9 +17,9 @@
   <form action="/signup/validate" method="POST">
     <p>
       Enter desired username: <br>
-      <input type="text" name="username"> <br>
+      <input type="text" name="username" minlength="3" maxlength="20" required> <br>
       Enter password: <br>
-      <input type="password" name="password"> <br>
+      <input type="password" name="password" minlength="8" maxlength="100" required> <br>
       <input type="submit" value="Sign up">
   </form>
 </body>

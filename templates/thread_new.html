@@ -23,12 +23,12 @@
   <p>
   <form action="/threads/new/validate" method="POST">
     Topic: <br>
-    <input type="text" name="topic" size="50"> <br>
+    <input type="text" name="topic" size="50" minlength="1" maxlength="50" required> <br>
     Contents: <br>
-    <textarea name="contents" rows="10" cols="100">
+    <textarea name="contents" rows="10" cols="100" minlength="1" maxlength="1000" required>
 </textarea> <br>
     <input type="submit" value="Send">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="hidden" name="csrf_token" value="{{session.csrf_token}}">
   </form>
 
   {% else %}
